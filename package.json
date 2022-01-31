@@ -1,0 +1,9 @@
+{
+  "name": "challenge-task-list",
+  "version": "0.0.0",
+  "description": "comand line todo tool",
+  "main": "src/index.js",
+  "author": "Thiago Bignotto",
+  "license": "MIT",
+  "type": "module"
+}
