@@ -1,19 +1,24 @@
+import { TasksController } from "./controllers/TasksController.js";
+
+const tasksController = new TasksController();
+
 const commands = [
   {
     command: "add",
-    action: () => {
-      console.log("add function");
+    action: (args) => {
+      //console.log({ myargs });
+      tasksController.createTask(args);
     },
   },
   {
     command: "complete",
-    action: () => {
+    action: (taskId) => {
       console.log("complete function");
     },
   },
   {
     command: "delete",
-    action: () => {
+    action: (taskId) => {
       console.log("delete function");
     },
   },

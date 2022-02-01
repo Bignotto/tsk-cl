@@ -1,5 +1,5 @@
 import { CliError } from "./shared/erros/CliError.js";
-import { commands } from "./commands/index.js";
+import { commands } from "./commands.js";
 
 function parse_comands(command) {
   if (!command)
@@ -9,41 +9,15 @@ function parse_comands(command) {
     );
 
   const cmd = commands.find((c) => c.command === command);
-  cmd.action();
-
-  // switch (command) {
-  //   case "-v":
-  //     console.log("BiG Tasker v0.0.0");
-  //     return;
-
-  //   case "add":
-  //     console.log("create new task");
-  //     break;
-
-  //   case "complete":
-  //     console.log("mark task complete");
-  //     break;
-
-  //   case "delete":
-  //     console.log("mark task complete");
-  //     break;
-
-  //   case "list":
-  //     console.log("mark task complete");
-  //     break;
-
-  //   case "next":
-  //     console.log("mark task complete");
-  //     break;
-
-  //   default:
-  //     throw new CliError("unknown command", `command ${command} is invalid`);
-  // }
+  if (!cmd) throw new CliError("invalid command", `${command} is invalid`);
+  return cmd;
 }
 
-function tasker(args) {
+function tasker() {
   try {
-    parse_comands(args[2]);
+    const command = parse_comands(process.argv[2]);
+    const args = process.argv.slice(3);
+    command.action(args);
   } catch (error) {
     if (error instanceof CliError) console.log(error.error, error.description);
   }
