@@ -5,10 +5,7 @@ const tasksController = new TasksController();
 const commands = [
   {
     command: "add",
-    action: (args) => {
-      //console.log({ myargs });
-      tasksController.createTask(args);
-    },
+    action: tasksController.createTask,
   },
   {
     command: "complete",

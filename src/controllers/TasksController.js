@@ -1,22 +1,26 @@
+import { CliError } from "../shared/erros/CliError.js";
+
 class TasksController {
   async createTask(args) {
-    const words = [];
-    let priority = 0;
+    const arg_idx = args.findIndex((a) => a === "-p");
 
-    args.forEach((word, i) => {
-      if (word[0] === "-") {
-        priority = args[i + 1];
-        return;
-      }
-      if (priority > 0) return;
+    if (arg_idx === 0)
+      throw new CliError(
+        "no description",
+        "cant add new task without description"
+      );
 
-      words.push(word);
-    });
+    const priority = arg_idx >= 1 ? args[arg_idx + 1] : 0;
+    const words = arg_idx === -1 ? args : args.slice(0, arg_idx);
 
+    //TODO: call service
     console.log({
       words: words.join(" "),
-      priority,
+      priority: priority ?? 0,
     });
+
+    //TODO: return service result
+    //TODO: should return TASK ID
   }
 }
 

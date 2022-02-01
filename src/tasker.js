@@ -13,11 +13,17 @@ function parse_comands(command) {
   return cmd;
 }
 
-function tasker() {
+async function tasker() {
   try {
+    //the "command" will always be the first word after the command itself
+    //return a function related to the command
     const command = parse_comands(process.argv[2]);
+
+    //the arguments will always be all other words after the command
     const args = process.argv.slice(3);
-    command.action(args);
+
+    //calls command function with all arguments
+    await command.action(args);
   } catch (error) {
     if (error instanceof CliError) console.log(error.error, error.description);
   }
