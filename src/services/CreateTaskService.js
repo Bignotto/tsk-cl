@@ -26,7 +26,6 @@ class CreateTaskService {
     const newTask = await this.tasksRepository.create({
       description,
       priority,
-      done: false,
     });
 
     return newTask;

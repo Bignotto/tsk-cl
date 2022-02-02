@@ -24,9 +24,12 @@ async function tasker() {
 
     //calls command function with all arguments
     const result = await command.action(args);
-    console.log({ result });
   } catch (error) {
-    if (error instanceof CliError) console.log(error.error, error.description);
+    if (error instanceof CliError) {
+      console.log(error.error, error.description);
+      return;
+    }
+    console.log(error);
   }
 }
 

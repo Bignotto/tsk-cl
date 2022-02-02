@@ -1,11 +1,11 @@
 import { CreateTaskService } from "../services/CreateTaskService.js";
-import { FakeTasksRepository } from "../repositories/FakeTasksRepository.js";
-import { CliError } from "../shared/erros/CliError.js";
+import { FileTasksRepository } from "../repositories/FileTasksRepository.js";
 
 class TasksController {
   async createTask(args) {
-    const tasksRepository = new FakeTasksRepository();
-    const createTaskService = new CreateTaskService(tasksRepository);
+    // const tasksRepository = new FakeTasksRepository();
+    const fileTasks = new FileTasksRepository();
+    const createTaskService = new CreateTaskService(fileTasks);
     const arg_idx = args.findIndex((a) => a === "-p");
 
     const priority = arg_idx >= 1 ? args[arg_idx + 1] : 0;
@@ -16,7 +16,8 @@ class TasksController {
       priority
     );
 
-    return task;
+    //TODO: show user the result
+    console.log({ task });
   }
 
   async updateTask(args) {}
