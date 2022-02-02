@@ -6,6 +6,12 @@ class CreateTaskService {
   }
 
   async execute(description, priority) {
+    if (!description)
+      throw new CliError(
+        "no description",
+        "cant add new task without description"
+      );
+
     const priorityValue = parseInt(priority);
 
     if (priorityValue !== priorityValue)

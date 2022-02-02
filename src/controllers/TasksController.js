@@ -8,13 +8,6 @@ class TasksController {
     const createTaskService = new CreateTaskService(tasksRepository);
     const arg_idx = args.findIndex((a) => a === "-p");
 
-    //TODO: move this business rule to service
-    if (arg_idx === 0)
-      throw new CliError(
-        "no description",
-        "cant add new task without description"
-      );
-
     const priority = arg_idx >= 1 ? args[arg_idx + 1] : 0;
     const descriptionArray = arg_idx === -1 ? args : args.slice(0, arg_idx);
 
@@ -23,14 +16,7 @@ class TasksController {
       priority
     );
 
-    console.log({
-      words: descriptionArray.join(" "),
-      priority: priority ?? 0,
-      result: task,
-    });
-
-    //TODO: return service result
-    //TODO: should return TASK ID
+    return task;
   }
 
   async updateTask(args) {}

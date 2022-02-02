@@ -23,7 +23,8 @@ async function tasker() {
     const args = process.argv.slice(3);
 
     //calls command function with all arguments
-    await command.action(args);
+    const result = await command.action(args);
+    console.log({ result });
   } catch (error) {
     if (error instanceof CliError) console.log(error.error, error.description);
   }
