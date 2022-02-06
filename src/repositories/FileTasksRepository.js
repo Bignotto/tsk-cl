@@ -1,34 +1,49 @@
 import fs from "fs";
-import { CliError } from "../shared/erros/CliError";
 
 class FileTasksRepository {
-  constructor() {}
+  constructor() {
+    this.tasks = [];
+  }
 
   async parseFile(filePath) {
     const exist = await fs.existsSync(filePath);
     if (!exist) {
-      await fs.writeFileSync(filePath, "0\n");
+      const task0 = {
+        id: 0,
+        description: "config task",
+        created: Date.now(),
+        status: "done",
+        priority: 0,
+      };
+
+      this.tasks.push(task0);
+      await fs.writeFileSync(".tasks", `${JSON.stringify(this.tasks)}\n`);
     }
 
-    const linesArray = fs.readFileSync(filePath).toString().split("\n");
-    const taskCount = parseInt(linesArray[0]);
-    if (taskCount !== taskCount)
-      throw new CliError("something wrong", "tasks file looks wierd");
+    const fileContent = await fs.readFileSync(filePath).toString();
+    const linesArray = JSON.parse(fileContent);
+    return linesArray;
   }
 
   async create({ description, priority }) {
-    await this.parseFile(".tasks");
+    //get tasks from file database
+    const tasksArray = await this.parseFile(".tasks");
 
-    // const lines = await fs.readFileSync(".tasks").toString();
-    // const task = {
-    //   id: lines.split("\n").length,
-    //   description,
-    //   created: Date.now(),
-    //   status: "pending",
-    //   priority,
-    // };
+    //create new task
+    const task = {
+      id: tasksArray[tasksArray.length - 1].id + 1,
+      description,
+      created: Date.now(),
+      status: "pending",
+      priority,
+    };
 
-    // await fs.appendFileSync(".tasks", `${JSON.stringify(task)}\n`);
+    //add new task to tasks array
+    tasksArray.push(task);
+
+    //save new array
+    await fs.writeFileSync(".tasks", `${JSON.stringify(tasksArray)}\n`);
+    return task;
   }
 }
 
