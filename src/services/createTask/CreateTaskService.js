@@ -1,4 +1,4 @@
-import { CliError } from "../shared/erros/CliError.js";
+import { CliError } from "../../shared/erros/CliError.js";
 
 class CreateTaskService {
   constructor(tasksRepository) {
