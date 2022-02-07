@@ -8,3 +8,5 @@ task delete <id> # Deletes a task
 task list [-a] # Shows pending tasks. The -a (or --all) option shows all tasks
 task next # Shows the next task of each priority
 ```
+
+https://stackoverflow.com/questions/9781218/how-to-change-node-jss-console-font-color

@@ -4,20 +4,17 @@ class FakeTasksRepository {
   }
 
   async create({ description, priority }) {
-    // console.log({ id: this.tasks.length, description, priority, done: false });
-    this.tasks.push({
+    const newtask = {
       id: this.tasks.length,
       description,
-      priority,
-      done: false,
-    });
-
-    return {
-      id: this.tasks.length,
-      description,
-      priority,
-      done: false,
+      created: Date.now(),
+      status: "pending",
+      priority: priority,
     };
+
+    this.tasks.push(newtask);
+
+    return Promise.resolve(newtask);
   }
 }
 
