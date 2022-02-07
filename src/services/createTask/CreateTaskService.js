@@ -17,7 +17,7 @@ class CreateTaskService {
     if (priorityValue !== priorityValue)
       throw new CliError("invalid argument", "priority should be a number");
 
-    if (priorityValue < 0 || priorityValue > 10)
+    if (priorityValue < 1 || priorityValue > 10)
       throw new CliError(
         "invalid argument",
         "priority should be a number between 0 and 10"
