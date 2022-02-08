@@ -5,7 +5,7 @@ class FakeTasksRepository {
 
   async create({ description, priority }) {
     const newtask = {
-      id: this.tasks.length,
+      id: this.tasks.length + 1,
       description,
       created: Date.now(),
       status: "pending",

@@ -31,12 +31,12 @@ describe("Complete Task", () => {
 
     const createdTask = await createTaskService.execute(description, priority);
 
-    const promise = completeTaskService.execute(0);
+    const promise = completeTaskService.execute();
 
     expect(promise).rejects.toBeInstanceOf(CliError);
 
     // expect(async () => {
-    //   await completeTaskService.execute(0);
+    //   await completeTaskService.execute();
     // }).rejects.toBeInstanceOf(CliError);
   });
 });
