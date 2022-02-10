@@ -1,4 +1,4 @@
-import { CliError } from "../../shared/erros/CliError";
+import { CliError } from "../../shared/erros/CliError.js";
 
 class CompleteTaskService {
   constructor(tasksRepository) {
@@ -9,7 +9,10 @@ class CompleteTaskService {
     if (taskId === undefined)
       throw new CliError("invalid parameter", "should provide task id");
 
-    const task = await this.tasksRepository.findById(taskId);
+    if (isNaN(taskId))
+      throw new CliError("invalid parameter", "task id should be a number");
+
+    const task = await this.tasksRepository.findById(Number(taskId));
     if (!task) throw new CliError("invalid parameter", "task not found");
 
     task.status = "done";

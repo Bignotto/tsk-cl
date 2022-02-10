@@ -25,6 +25,10 @@ class FileTasksRepository {
     return linesArray;
   }
 
+  async saveFile(tasksArray) {
+    await fs.writeFileSync(".tasks", `${JSON.stringify(tasksArray)}\n`);
+  }
+
   async create({ description, priority }) {
     //get tasks from file database
     const tasksArray = await this.parseFile(".tasks");
@@ -43,6 +47,30 @@ class FileTasksRepository {
 
     //save new array
     await fs.writeFileSync(".tasks", `${JSON.stringify(tasksArray)}\n`);
+    return task;
+  }
+
+  async findById(taskId) {
+    const tasksArray = await this.parseFile(".tasks");
+    const task = tasksArray.find((t) => t.id === taskId);
+    return task;
+  }
+
+  async update({ id, description, created, status, priority }) {
+    const tasksArray = await this.parseFile(".tasks");
+    let task = {};
+    const updatedTasks = tasksArray.map((t) => {
+      if (t.id === id) {
+        t.description = description;
+        t.created = created;
+        t.status = status;
+        t.priority = priority;
+        task = t;
+      }
+      return t;
+    });
+
+    await this.saveFile(updatedTasks);
     return task;
   }
 }

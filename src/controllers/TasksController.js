@@ -1,5 +1,6 @@
 import { CreateTaskService } from "../services/createTask/CreateTaskService.js";
 import { FileTasksRepository } from "../repositories/FileTasksRepository.js";
+import { CompleteTaskService } from "../services/completeTask/CompleteTaskService.js";
 
 class TasksController {
   async createTask(args) {
@@ -8,7 +9,7 @@ class TasksController {
     const createTaskService = new CreateTaskService(fileTasks);
     const arg_idx = args.findIndex((a) => a === "-p");
 
-    const priority = arg_idx >= 1 ? args[arg_idx + 1] : 0;
+    const priority = arg_idx >= 1 ? args[arg_idx + 1] : 1;
     const descriptionArray = arg_idx === -1 ? args : args.slice(0, arg_idx);
 
     const task = await createTaskService.execute(
@@ -20,7 +21,14 @@ class TasksController {
     console.log({ task });
   }
 
-  async updateTask(args) {}
+  async completeTask(args) {
+    const fileTasks = new FileTasksRepository();
+    const completeTask = new CompleteTaskService(fileTasks);
+
+    const updatedTask = await completeTask.execute(args[0]);
+
+    console.log({ updatedTask });
+  }
 }
 
 export { TasksController };

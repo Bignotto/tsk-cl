@@ -9,9 +9,7 @@ const commands = [
   },
   {
     command: "complete",
-    action: (taskId) => {
-      console.log("complete function");
-    },
+    action: tasksController.completeTask,
   },
   {
     command: "delete",
