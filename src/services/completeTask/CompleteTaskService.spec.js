@@ -25,6 +25,17 @@ describe("Complete Task", () => {
     expect(updatedTask.status).toBe("done");
   });
 
+  it("should not be able to complete a task with invalid id", async () => {
+    const description = "this is a test task";
+    const priority = "7";
+
+    await createTaskService.execute(description, priority);
+
+    const promise = completeTaskService.execute(32);
+
+    expect(promise).rejects.toBeInstanceOf(CliError);
+  });
+
   it("should not be able to complete a task without id", async () => {
     const description = "this is a test task";
     const priority = "7";
@@ -34,9 +45,5 @@ describe("Complete Task", () => {
     const promise = completeTaskService.execute();
 
     expect(promise).rejects.toBeInstanceOf(CliError);
-
-    // expect(async () => {
-    //   await completeTaskService.execute();
-    // }).rejects.toBeInstanceOf(CliError);
   });
 });
