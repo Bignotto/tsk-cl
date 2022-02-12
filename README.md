@@ -75,3 +75,11 @@ Implemented tests:
 - should be able to delete a task
 - should not be able to delete task without id
 - should not be able to delete task with invalid id
+
+## Fix Create Task Priority
+
+Priority should be set as `high`, `normal` or `low`. `CreateTaskService` was saving priority as a number.
+
+Fixed `CreateTaskService` so priotiry is saved correctly.
+
+Fixed all tests to reflect these changes.
