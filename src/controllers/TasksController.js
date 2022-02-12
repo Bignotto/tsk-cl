@@ -1,6 +1,7 @@
 import { CreateTaskService } from "../services/createTask/CreateTaskService.js";
 import { FileTasksRepository } from "../repositories/FileTasksRepository.js";
 import { CompleteTaskService } from "../services/completeTask/CompleteTaskService.js";
+import { ListTasksService } from "../services/listTasks/ListTasksService.js";
 
 class TasksController {
   async createTask(args) {
@@ -31,7 +32,18 @@ class TasksController {
     console.log({ updatedTask });
   }
 
-  async listTasks() {}
+  async listTasks(args) {
+    const fileTasks = new FileTasksRepository();
+    const listTasks = new ListTasksService(fileTasks);
+
+    const arg_idx = args.findIndex((a) => a === "-a");
+    const listAll = arg_idx !== -1;
+
+    const tasks = await listTasks.execute(listAll);
+
+    //TODO: format return to user: list tasks
+    console.log({ tasks });
+  }
 }
 
 export { TasksController };

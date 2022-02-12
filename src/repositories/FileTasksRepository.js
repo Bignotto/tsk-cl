@@ -73,6 +73,11 @@ class FileTasksRepository {
     await this.saveFile(updatedTasks);
     return task;
   }
+
+  async list() {
+    const tasksArray = await this.parseFile(".tasks");
+    return tasksArray;
+  }
 }
 
 export { FileTasksRepository };

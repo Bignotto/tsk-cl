@@ -7,10 +7,18 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
+      "name": "Launch Add Task",
       "skipFiles": ["<node_internals>/**"],
       "program": "${workspaceFolder}/src/index.js",
       "args": ["add", "new", "taks", "-p", "8"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch List Tasks",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/src/index.js",
+      "args": ["list", "-a"]
     },
     {
       "type": "node",
