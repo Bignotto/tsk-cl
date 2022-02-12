@@ -41,3 +41,15 @@ Implemented tests:
 - should be able to complete a task
 - should not be able to complete a task with invalid id
 - should not be able to complete a task without id
+
+## List Tasks command
+
+Implemented list tasks command.
+
+List all tasks pending on database file. If parameter -a is provided, all tasks are listed;
+
+Implemented tests:
+
+- should be able to list tasks correctly
+- should list done tasks when -a parameter is provided
+- should list only pending tasks

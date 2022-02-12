@@ -40,6 +40,10 @@ class FakeTasksRepository {
     const task = this.tasks.find((t) => t.id === taskId);
     return Promise.resolve(task);
   }
+
+  async list() {
+    return Promise.resolve(this.tasks);
+  }
 }
 
 export { FakeTasksRepository };

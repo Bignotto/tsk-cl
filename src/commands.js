@@ -19,9 +19,7 @@ const commands = [
   },
   {
     command: "list",
-    action: () => {
-      console.log("list function");
-    },
+    action: tasksController.listTasks,
   },
   {
     command: "next",
