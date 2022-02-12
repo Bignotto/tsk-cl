@@ -13,9 +13,7 @@ const commands = [
   },
   {
     command: "delete",
-    action: (taskId) => {
-      console.log("delete function");
-    },
+    action: tasksController.deleteTask,
   },
   {
     command: "list",

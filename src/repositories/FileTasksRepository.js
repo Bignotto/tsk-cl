@@ -78,6 +78,13 @@ class FileTasksRepository {
     const tasksArray = await this.parseFile(".tasks");
     return tasksArray;
   }
+
+  async delete(taskId) {
+    const tasksArray = await this.parseFile(".tasks");
+    const returnArray = tasksArray.filter((t) => t.id !== taskId);
+    await this.saveFile(returnArray);
+    return returnArray;
+  }
 }
 
 export { FileTasksRepository };

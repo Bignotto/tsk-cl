@@ -44,6 +44,12 @@ class FakeTasksRepository {
   async list() {
     return Promise.resolve(this.tasks);
   }
+
+  async delete(taskId) {
+    const deletedTasks = this.tasks.filter((t) => t.id !== taskId);
+    this.tasks = deletedTasks;
+    return Promise.resolve();
+  }
 }
 
 export { FakeTasksRepository };
