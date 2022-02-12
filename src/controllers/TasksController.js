@@ -17,7 +17,7 @@ class TasksController {
       priority
     );
 
-    //TODO: format return to user
+    //TODO: format return to user: created task
     console.log({ task });
   }
 
@@ -27,8 +27,11 @@ class TasksController {
 
     const updatedTask = await completeTask.execute(args[0]);
 
+    //TODO: format return to user: completed task
     console.log({ updatedTask });
   }
+
+  async listTasks() {}
 }
 
 export { TasksController };
