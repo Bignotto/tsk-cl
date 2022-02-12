@@ -11,7 +11,8 @@ class TasksController {
     const createTaskService = new CreateTaskService(fileTasks);
     const arg_idx = args.findIndex((a) => a === "-p");
 
-    const priority = arg_idx >= 1 ? args[arg_idx + 1] : 1;
+    //TODO: move this rule to service
+    const priority = arg_idx >= 1 ? args[arg_idx + 1] : "normal";
     const descriptionArray = arg_idx === -1 ? args : args.slice(0, arg_idx);
 
     const task = await createTaskService.execute(

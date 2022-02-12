@@ -12,15 +12,12 @@ class CreateTaskService {
         "cant add new task without description"
       );
 
-    const priorityValue = parseInt(priority);
+    const priorities = ["high", "normal", "low"];
 
-    if (priorityValue !== priorityValue)
-      throw new CliError("invalid argument", "priority should be a number");
-
-    if (priorityValue < 1 || priorityValue > 10)
+    if (!priorities.includes(priority))
       throw new CliError(
         "invalid argument",
-        "priority should be a number between 0 and 10"
+        "priority should be high, normal or low"
       );
 
     const newTask = await this.tasksRepository.create({

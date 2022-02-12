@@ -16,7 +16,7 @@ describe("Complete Task", () => {
 
   it("should be able to complete a task", async () => {
     const description = "this is a test task";
-    const priority = "7";
+    const priority = "high";
 
     const createdTask = await createTaskService.execute(description, priority);
 
@@ -27,7 +27,7 @@ describe("Complete Task", () => {
 
   it("should not be able to complete a task with invalid id", async () => {
     const description = "this is a test task";
-    const priority = "7";
+    const priority = "normal";
 
     await createTaskService.execute(description, priority);
 
@@ -38,9 +38,9 @@ describe("Complete Task", () => {
 
   it("should not be able to complete a task without id", async () => {
     const description = "this is a test task";
-    const priority = "7";
+    const priority = "low";
 
-    const createdTask = await createTaskService.execute(description, priority);
+    await createTaskService.execute(description, priority);
 
     const promise = completeTaskService.execute();
 
