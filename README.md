@@ -42,14 +42,36 @@ Implemented tests:
 - should not be able to complete a task with invalid id
 - should not be able to complete a task without id
 
-## List Tasks command
+## List Tasks Command
 
 Implemented list tasks command.
 
-List all tasks pending on database file. If parameter -a is provided, all tasks are listed;
+List all tasks pending on database file. If parameter -a is provided, all tasks are listed.
+
+### Refactored both file and memory repositories
+
+- implemented `list` function to return all tasks in tasks database.
+
+### Tests
 
 Implemented tests:
 
 - should be able to list tasks correctly
 - should list done tasks when -a parameter is provided
 - should list only pending tasks
+
+## Delete Task Command
+
+Implemented delete task command.
+
+### Refactored both file and memory repositories
+
+- implemented `delete` function to delete a task.
+
+### Tests
+
+Implemented tests:
+
+- should be able to delete a task
+- should not be able to delete task without id
+- should not be able to delete task with invalid id

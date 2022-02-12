@@ -2,6 +2,7 @@ import { CreateTaskService } from "../services/createTask/CreateTaskService.js";
 import { FileTasksRepository } from "../repositories/FileTasksRepository.js";
 import { CompleteTaskService } from "../services/completeTask/CompleteTaskService.js";
 import { ListTasksService } from "../services/listTasks/ListTasksService.js";
+import { DeleteTaskService } from "../services/deleteTask/DeleteTaskService.js";
 
 class TasksController {
   async createTask(args) {
@@ -42,6 +43,15 @@ class TasksController {
     const tasks = await listTasks.execute(listAll);
 
     //TODO: format return to user: list tasks
+    console.log({ tasks });
+  }
+
+  async deleteTask(args) {
+    const fileTasks = new FileTasksRepository();
+    const deleteTask = new DeleteTaskService(fileTasks);
+
+    const tasks = await deleteTask.execute(args[0]);
+
     console.log({ tasks });
   }
 }
