@@ -18,9 +18,9 @@ describe("Delete Task Service", () => {
     listTasksService = new ListTasksService(tasksRepository);
     deleteTaskService = new DeleteTaskService(tasksRepository);
 
-    await createTaskService.execute("this is task 1", "5");
-    await createTaskService.execute("this is task 2", "8");
-    await createTaskService.execute("this is task 3", "2");
+    await createTaskService.execute("this is task 1", "high");
+    await createTaskService.execute("this is task 2", "normal");
+    await createTaskService.execute("this is task 3", "low");
   });
 
   it("should be able to delete a task", async () => {

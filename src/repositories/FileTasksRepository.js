@@ -33,9 +33,13 @@ class FileTasksRepository {
     //get tasks from file database
     const tasksArray = await this.parseFile(".tasks");
 
+    //if tasksArray is empty, define new task id as 1
+    const newTaskId =
+      tasksArray.length > 0 ? tasksArray[tasksArray.length - 1].id + 1 : 1;
+
     //create new task
     const task = {
-      id: tasksArray[tasksArray.length - 1].id + 1,
+      id: newTaskId,
       description,
       created: Date.now(),
       status: "pending",
