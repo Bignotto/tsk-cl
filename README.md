@@ -83,3 +83,10 @@ Priority should be set as `high`, `normal` or `low`. `CreateTaskService` was sav
 Fixed `CreateTaskService` so priotiry is saved correctly.
 
 Fixed all tests to reflect these changes.
+
+### fev/13/2022
+
+## Fix Create Task Priority Rule
+
+When user doesn't provide a priority, priority should be set to `normal`.
+This rule is now implemented in create task service.
