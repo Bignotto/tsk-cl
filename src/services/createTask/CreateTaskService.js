@@ -12,6 +12,8 @@ class CreateTaskService {
         "cant add new task without description"
       );
 
+    if (!priority) priority = "normal";
+
     const priorities = ["high", "normal", "low"];
 
     if (!priorities.includes(priority))

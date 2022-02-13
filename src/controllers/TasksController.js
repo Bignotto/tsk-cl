@@ -12,7 +12,8 @@ class TasksController {
     const arg_idx = args.findIndex((a) => a === "-p");
 
     //TODO: move this rule to service
-    const priority = arg_idx >= 1 ? args[arg_idx + 1] : "normal";
+    const priority = arg_idx >= 1 ? args[arg_idx + 1] : undefined;
+
     const descriptionArray = arg_idx === -1 ? args : args.slice(0, arg_idx);
 
     const task = await createTaskService.execute(
