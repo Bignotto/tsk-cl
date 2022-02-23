@@ -21,9 +21,7 @@ const commands = [
   },
   {
     command: "next",
-    action: () => {
-      console.log("next function");
-    },
+    action: tasksController.nextTask,
   },
 ];
 
