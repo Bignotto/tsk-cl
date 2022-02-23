@@ -3,6 +3,7 @@ import { FileTasksRepository } from "../repositories/FileTasksRepository.js";
 import { CompleteTaskService } from "../services/completeTask/CompleteTaskService.js";
 import { ListTasksService } from "../services/listTasks/ListTasksService.js";
 import { DeleteTaskService } from "../services/deleteTask/DeleteTaskService.js";
+import { NextTaskService } from "../services/nextTask/NextTaskService.js";
 
 class TasksController {
   async createTask(args) {
@@ -55,6 +56,15 @@ class TasksController {
     const tasks = await deleteTask.execute(args[0]);
 
     console.log({ tasks });
+  }
+
+  async nextTask(args) {
+    const fileTasks = new FileTasksRepository();
+    const nextTask = new NextTaskService(fileTasks);
+
+    const response = await nextTask.execute();
+
+    console.log({ response });
   }
 }
 

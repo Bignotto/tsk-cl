@@ -11,15 +11,31 @@ task next # Shows the next task of each priority
 
 https://stackoverflow.com/questions/9781218/how-to-change-node-jss-console-font-color
 
-### fev/07/2022
+---
 
-Implemented tests for Create Task Service:
+### fev/23/2022
 
-- should be able to create new task
-- should always create new tasks with status pending
-- should not accept new tasks with negative priority
-- should not accept new tasks with priority higher than 10
-- should not accept new tasks with 0 priority
+# Implemented Next Task Command
+
+Implemented `next` command.
+This command list the first task added for each priority, ordered by priority.
+
+### Tests
+
+- should list next task correctly - all tasks
+- should list next task correctly - normal task complete
+- should list next task correctly - high task complete
+- should list next task correctly - more than one task on each priority
+- should list next task correctly - more than one task on each priority - complete high task
+
+---
+
+### fev/13/2022
+
+## Fix Create Task Priority Rule
+
+When user doesn't provide a priority, priority should be set to `normal`.
+This rule is now implemented in create task service.
 
 ---
 
@@ -84,9 +100,14 @@ Fixed `CreateTaskService` so priotiry is saved correctly.
 
 Fixed all tests to reflect these changes.
 
-### fev/13/2022
+---
 
-## Fix Create Task Priority Rule
+### fev/07/2022
 
-When user doesn't provide a priority, priority should be set to `normal`.
-This rule is now implemented in create task service.
+Implemented tests for Create Task Service:
+
+- should be able to create new task
+- should always create new tasks with status pending
+- should not accept new tasks with negative priority
+- should not accept new tasks with priority higher than 10
+- should not accept new tasks with 0 priority
