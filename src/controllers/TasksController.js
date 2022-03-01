@@ -5,6 +5,8 @@ import { ListTasksService } from "../services/listTasks/ListTasksService.js";
 import { DeleteTaskService } from "../services/deleteTask/DeleteTaskService.js";
 import { NextTaskService } from "../services/nextTask/NextTaskService.js";
 
+import { taskListView } from "../views/taskListView.js";
+
 class TasksController {
   async createTask(args) {
     // const tasksRepository = new FakeTasksRepository();
@@ -12,7 +14,6 @@ class TasksController {
     const createTaskService = new CreateTaskService(fileTasks);
     const arg_idx = args.findIndex((a) => a === "-p");
 
-    //TODO: move this rule to service
     const priority = arg_idx >= 1 ? args[arg_idx + 1] : undefined;
 
     const descriptionArray = arg_idx === -1 ? args : args.slice(0, arg_idx);
@@ -46,7 +47,7 @@ class TasksController {
     const tasks = await listTasks.execute(listAll);
 
     //TODO: format return to user: list tasks
-    console.log({ tasks });
+    taskListView(tasks);
   }
 
   async deleteTask(args) {

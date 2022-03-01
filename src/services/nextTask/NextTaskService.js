@@ -11,9 +11,6 @@ class NextTaskService {
     const normalTasks = pendingTasks.filter((t) => t.priority === "normal");
     const lowTasks = pendingTasks.filter((t) => t.priority === "low");
 
-    //TODO: fix how to return tasks
-    // should be position fixed? [0] == high, [1] == normal, [2] == low
-
     const returnNextTasks = [];
     if (highTasks[0]) returnNextTasks.push(highTasks[0]);
     if (normalTasks[0]) returnNextTasks.push(normalTasks[0]);
