@@ -22,21 +22,15 @@ describe("List Tasks Service", () => {
   });
 
   it("should be able to list tasks correctly", async () => {
-    const tasks = await listTasksService.execute();
+    let { tasks } = await listTasksService.execute();
 
     expect(tasks.length).toBe(3);
-
-    await completeTask.execute("1");
-
-    const tasks2 = await listTasksService.execute();
-
-    expect(tasks2.length).toBe(2);
   });
 
   it("should list only pending tasks", async () => {
     await completeTask.execute("1");
 
-    const tasks = await listTasksService.execute();
+    const { tasks } = await listTasksService.execute();
 
     expect(tasks.length).toBe(2);
   });
@@ -44,7 +38,7 @@ describe("List Tasks Service", () => {
   it("should list all pending and done tasks when provide -a parameter", async () => {
     await completeTask.execute("1");
 
-    const tasks = await listTasksService.execute(true);
+    const { tasks } = await listTasksService.execute(true);
 
     expect(tasks.length).toBe(3);
   });

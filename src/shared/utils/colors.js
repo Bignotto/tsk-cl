@@ -13,3 +13,7 @@ export function green(text) {
 export function red(text) {
   return `\x1b[91m${text}\x1b[0m`;
 }
+
+export function brightWhite(text) {
+  return `\x1b[97m${text}\x1b[0m`;
+}

@@ -6,11 +6,20 @@ class ListTasksService {
   async execute(listAll) {
     const tasks = await this.tasksRepository.list();
 
-    if (listAll) return tasks;
-
     const pendingTasks = tasks.filter((t) => t.status === "pending");
 
-    return pendingTasks;
+    if (listAll)
+      return {
+        tasks,
+        totalTasks: tasks.length,
+        pendingTotal: pendingTasks.length,
+      };
+
+    return {
+      tasks: pendingTasks,
+      totalTasks: tasks.length,
+      pendingTotal: pendingTasks.length,
+    };
   }
 }
 

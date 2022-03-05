@@ -5,7 +5,9 @@ import { ListTasksService } from "../services/listTasks/ListTasksService.js";
 import { DeleteTaskService } from "../services/deleteTask/DeleteTaskService.js";
 import { NextTaskService } from "../services/nextTask/NextTaskService.js";
 
-import { taskListView } from "../views/taskListView.js";
+import { TaskListView } from "../views/TaskListView.js";
+
+import * as colors from "../shared/utils/colors.js";
 
 class TasksController {
   async createTask(args) {
@@ -39,15 +41,17 @@ class TasksController {
 
   async listTasks(args) {
     const fileTasks = new FileTasksRepository();
+    const taskListView = new TaskListView();
     const listTasks = new ListTasksService(fileTasks);
 
     const arg_idx = args.findIndex((a) => a === "-a");
     const listAll = arg_idx !== -1;
 
-    const tasks = await listTasks.execute(listAll);
+    const { tasks, totalTasks, pendingTotal } = await listTasks.execute(
+      listAll
+    );
 
-    //TODO: format return to user: list tasks
-    taskListView(tasks);
+    taskListView.render(tasks, listAll, totalTasks, pendingTotal);
   }
 
   async deleteTask(args) {
