@@ -1,5 +1,5 @@
 function printHelp() {
-  console.log(`tasker available commands:`);
+  console.log(`\ntsk available commands:`);
   console.log(`tsk add <task description> [-p <priority>] create new task`);
   console.log(
     `tsk complete <id>                          mark task as complete`

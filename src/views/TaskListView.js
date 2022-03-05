@@ -12,7 +12,7 @@ class TaskListView {
       return;
     }
 
-    if (pendingTotal === 0) {
+    if (pendingTotal === 0 && !listAll) {
       NoPendingTasksMessage();
       return;
     }
