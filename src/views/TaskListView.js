@@ -7,13 +7,6 @@ import { NoTasksMessage } from "./components/NoTasksMessage.js";
 class TaskListView {
   render(tasks, listAll, totalTasks, pendingTotal) {
     if (totalTasks === 0) {
-      // console.log(`\nYou have not created any tasks yet`);
-      // console.log(`Try:\n`);
-      // console.log(
-      //   colors.brightWhite(
-      //     `tsk add New task description [-p] <high|normal|low>`
-      //   )
-      // );
       NoTasksMessage();
       return;
     }

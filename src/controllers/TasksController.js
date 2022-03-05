@@ -68,10 +68,10 @@ class TasksController {
 
     const nextTask = new NextTaskService(fileTasks);
 
-    const response = await nextTask.execute();
+    const { tasks, totalTasks, pendingTotal } = await nextTask.execute();
 
-    //console.log({ response });
-    nextTaskView.render(response);
+    //console.log({ tasks });
+    nextTaskView.render(tasks, totalTasks, pendingTotal);
   }
 }
 

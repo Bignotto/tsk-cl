@@ -16,7 +16,11 @@ class NextTaskService {
     if (normalTasks[0]) returnNextTasks.push(normalTasks[0]);
     if (lowTasks[0]) returnNextTasks.push(lowTasks[0]);
 
-    return returnNextTasks;
+    return {
+      tasks: returnNextTasks,
+      totalTasks: tasks.length,
+      pendingTotal: pendingTasks.length,
+    };
   }
 }
 

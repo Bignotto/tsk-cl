@@ -6,7 +6,7 @@ import { AppTitle } from "./components/AppTitle.js";
 import { NoTasksMessage } from "./components/NoTasksMessage.js";
 
 class NextTaskView {
-  render(tasks) {
+  render(tasks, totalTasks, pendingTotal) {
     if (tasks.length === 0) {
       NoTasksMessage();
       return;
@@ -25,6 +25,13 @@ class NextTaskView {
       );
     });
 
+    const ratio = (1 - pendingTotal / totalTasks) * 100;
+    console.log(`\n${ratio.toFixed(1)}% done`);
+    console.log(
+      `${colors.green(
+        (totalTasks - pendingTotal).toString()
+      )} done, ${colors.red(pendingTotal)} pending`
+    );
     AppTitle("");
   }
 }
