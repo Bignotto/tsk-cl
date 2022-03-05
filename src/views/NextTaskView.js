@@ -4,11 +4,17 @@ import * as colors from "../shared/utils/colors.js";
 import { getTaskAge } from "../shared/utils/getTaskAge.js";
 import { AppTitle } from "./components/AppTitle.js";
 import { NoTasksMessage } from "./components/NoTasksMessage.js";
+import { NoPendingTasksMessage } from "./components/NoPendingTasksMessage.js";
 
 class NextTaskView {
   render(tasks, totalTasks, pendingTotal) {
-    if (tasks.length === 0) {
+    if (totalTasks === 0) {
       NoTasksMessage();
+      return;
+    }
+
+    if (pendingTotal === 0) {
+      NoPendingTasksMessage();
       return;
     }
 

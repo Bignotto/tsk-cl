@@ -3,11 +3,17 @@ import * as colors from "../shared/utils/colors.js";
 
 import { getTaskAge } from "../shared/utils/getTaskAge.js";
 import { NoTasksMessage } from "./components/NoTasksMessage.js";
+import { NoPendingTasksMessage } from "./components/NoPendingTasksMessage.js";
 
 class TaskListView {
   render(tasks, listAll, totalTasks, pendingTotal) {
     if (totalTasks === 0) {
       NoTasksMessage();
+      return;
+    }
+
+    if (pendingTotal === 0) {
+      NoPendingTasksMessage();
       return;
     }
 
