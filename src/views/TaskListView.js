@@ -2,23 +2,25 @@ import * as icons from "../shared/utils/icons.js";
 import * as colors from "../shared/utils/colors.js";
 
 import { getTaskAge } from "../shared/utils/getTaskAge.js";
+import { NoTasksMessage } from "./components/NoTasksMessage.js";
 
 class TaskListView {
   render(tasks, listAll, totalTasks, pendingTotal) {
     if (totalTasks === 0) {
-      console.log(`\nYou have not created any tasks yet`);
-      console.log(`Try:\n`);
-      console.log(
-        colors.brightWhite(
-          `tsk add New task description [-p] <high|normal|low>`
-        )
-      );
+      // console.log(`\nYou have not created any tasks yet`);
+      // console.log(`Try:\n`);
+      // console.log(
+      //   colors.brightWhite(
+      //     `tsk add New task description [-p] <high|normal|low>`
+      //   )
+      // );
+      NoTasksMessage();
       return;
     }
 
     const ratio = (1 - pendingTotal / totalTasks) * 100;
 
-    console.log(`\ntasks » ${totalTasks - pendingTotal}/${tasks.length}`);
+    console.log(`\ntasks » ${totalTasks - pendingTotal}/${totalTasks}`);
 
     tasks.forEach((t) => {
       if (t.status === "done" && !listAll) return;

@@ -33,3 +33,19 @@ export function undoneMark(priority) {
   }
   return `${priorityColor}□\x1b[0m`;
 }
+
+export function priorityTag(priority) {
+  let priorityColor;
+  switch (priority) {
+    case "high":
+      priorityColor = "\x1b[91mHIGH";
+      break;
+    case "normal":
+      priorityColor = "\x1b[33mNORMAL";
+      break;
+    case "low":
+      priorityColor = "\x1b[37mLOW";
+      break;
+  }
+  return `${priorityColor}\x1b[0m`;
+}

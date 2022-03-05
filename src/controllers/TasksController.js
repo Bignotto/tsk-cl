@@ -6,8 +6,7 @@ import { DeleteTaskService } from "../services/deleteTask/DeleteTaskService.js";
 import { NextTaskService } from "../services/nextTask/NextTaskService.js";
 
 import { TaskListView } from "../views/TaskListView.js";
-
-import * as colors from "../shared/utils/colors.js";
+import { NextTaskView } from "../views/NextTaskView.js";
 
 class TasksController {
   async createTask(args) {
@@ -65,11 +64,14 @@ class TasksController {
 
   async nextTask(args) {
     const fileTasks = new FileTasksRepository();
+    const nextTaskView = new NextTaskView();
+
     const nextTask = new NextTaskService(fileTasks);
 
     const response = await nextTask.execute();
 
-    console.log({ response });
+    //console.log({ response });
+    nextTaskView.render(response);
   }
 }
 
