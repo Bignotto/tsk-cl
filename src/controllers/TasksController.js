@@ -7,11 +7,13 @@ import { NextTaskService } from "../services/nextTask/NextTaskService.js";
 
 import { TaskListView } from "../views/TaskListView.js";
 import { NextTaskView } from "../views/NextTaskView.js";
+import { CreateTaskView } from "../views/CreateTaskView.js";
 
 class TasksController {
   async createTask(args) {
     // const tasksRepository = new FakeTasksRepository();
     const fileTasks = new FileTasksRepository();
+    const createTaskView = new CreateTaskView();
     const createTaskService = new CreateTaskService(fileTasks);
     const arg_idx = args.findIndex((a) => a === "-p");
 
@@ -19,13 +21,12 @@ class TasksController {
 
     const descriptionArray = arg_idx === -1 ? args : args.slice(0, arg_idx);
 
-    const task = await createTaskService.execute(
+    const { tasks, totalTasks, pendingTotal } = await createTaskService.execute(
       descriptionArray.join(" "),
       priority
     );
 
-    //TODO: format return to user: created task
-    console.log({ task });
+    createTaskView.render(tasks, totalTasks, pendingTotal);
   }
 
   async completeTask(args) {
@@ -70,7 +71,6 @@ class TasksController {
 
     const { tasks, totalTasks, pendingTotal } = await nextTask.execute();
 
-    //console.log({ tasks });
     nextTaskView.render(tasks, totalTasks, pendingTotal);
   }
 }

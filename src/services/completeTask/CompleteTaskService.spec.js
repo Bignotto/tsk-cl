@@ -18,9 +18,9 @@ describe("Complete Task", () => {
     const description = "this is a test task";
     const priority = "high";
 
-    const createdTask = await createTaskService.execute(description, priority);
+    const { tasks } = await createTaskService.execute(description, priority);
 
-    const updatedTask = await completeTaskService.execute(createdTask.id);
+    const updatedTask = await completeTaskService.execute(tasks[0].id);
 
     expect(updatedTask.status).toBe("done");
   });
