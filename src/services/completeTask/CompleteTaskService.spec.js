@@ -20,9 +20,11 @@ describe("Complete Task", () => {
 
     const { tasks } = await createTaskService.execute(description, priority);
 
-    const updatedTask = await completeTaskService.execute(tasks[0].id);
+    const { tasks: updatedTask } = await completeTaskService.execute(
+      tasks[0].id
+    );
 
-    expect(updatedTask.status).toBe("done");
+    expect(updatedTask[0].status).toBe("done");
   });
 
   it("should not be able to complete a task with invalid id", async () => {

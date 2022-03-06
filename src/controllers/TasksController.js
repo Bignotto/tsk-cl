@@ -8,6 +8,7 @@ import { NextTaskService } from "../services/nextTask/NextTaskService.js";
 import { TaskListView } from "../views/TaskListView.js";
 import { NextTaskView } from "../views/NextTaskView.js";
 import { CreateTaskView } from "../views/CreateTaskView.js";
+import { CompleteTaskView } from "../views/CompleteTaskView.js";
 
 class TasksController {
   async createTask(args) {
@@ -31,12 +32,14 @@ class TasksController {
 
   async completeTask(args) {
     const fileTasks = new FileTasksRepository();
+    const completeTaskView = new CompleteTaskView();
     const completeTask = new CompleteTaskService(fileTasks);
 
-    const updatedTask = await completeTask.execute(args[0]);
+    const { tasks, totalTasks, pendingTotal } = await completeTask.execute(
+      args[0]
+    );
 
-    //TODO: format return to user: completed task
-    console.log({ updatedTask });
+    completeTaskView.render(tasks, totalTasks, pendingTotal);
   }
 
   async listTasks(args) {

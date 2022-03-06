@@ -18,7 +18,14 @@ class CompleteTaskService {
     task.status = "done";
 
     const updatedTask = await this.tasksRepository.update(task);
-    return updatedTask;
+
+    const tasks = await this.tasksRepository.list();
+
+    return {
+      tasks: [updatedTask],
+      totalTasks: tasks.length,
+      pendingTotal: tasks.filter((t) => t.status === "pending").length,
+    };
   }
 }
 

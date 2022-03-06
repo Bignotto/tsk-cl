@@ -4,9 +4,9 @@ import * as icons from "../shared/utils/icons.js";
 import { AppTitle } from "./components/AppTitle.js";
 import { getTaskAge } from "../shared/utils/getTaskAge.js";
 
-class CreateTaskView {
+class CompleteTaskView {
   render(tasks, totalTasks, pendingTotal) {
-    console.log("\ntask added");
+    console.log("\ntask completed");
 
     tasks.forEach((t) => {
       let age = getTaskAge(t);
@@ -14,7 +14,7 @@ class CreateTaskView {
       console.log(
         `${colors.gray(
           `${t.id.toString().padStart(3, " ")}.`
-        )} ${icons.undoneMark(t.priority)} ${colors.white(
+        )} ${icons.greenCheckMark()} ${colors.white(
           t.description
         )} ${colors.gray(age)} ${icons.priorityTag(t.priority)}`
       );
@@ -31,4 +31,4 @@ class CreateTaskView {
   }
 }
 
-export { CreateTaskView };
+export { CompleteTaskView };
