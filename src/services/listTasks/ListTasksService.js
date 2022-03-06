@@ -6,20 +6,20 @@ class ListTasksService {
   async execute(listAll) {
     const tasks = await this.tasksRepository.list();
 
-    //TODO: move date formatting to create task service
-    const transform = tasks.map((t) => {
-      t.created = new Date(t.created)
-        .toISOString()
-        .replace(/T/, " ") // replace T with a space
-        .replace(/\..+/, "");
-      return t;
-    });
+    const pendingTasks = tasks.filter((t) => t.status === "pending");
 
-    if (listAll) return transform;
+    if (listAll)
+      return {
+        tasks,
+        totalTasks: tasks.length,
+        pendingTotal: pendingTasks.length,
+      };
 
-    const pendingTasks = transform.filter((t) => t.status === "pending");
-
-    return pendingTasks;
+    return {
+      tasks: pendingTasks,
+      totalTasks: tasks.length,
+      pendingTotal: pendingTasks.length,
+    };
   }
 }
 

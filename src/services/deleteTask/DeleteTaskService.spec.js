@@ -26,7 +26,7 @@ describe("Delete Task Service", () => {
   it("should be able to delete a task", async () => {
     await deleteTaskService.execute(1);
 
-    const tasks = await listTasksService.execute(true);
+    const { tasks } = await listTasksService.execute(true);
     expect(tasks.length).toBe(2);
   });
 

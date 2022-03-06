@@ -5,48 +5,56 @@ import { ListTasksService } from "../services/listTasks/ListTasksService.js";
 import { DeleteTaskService } from "../services/deleteTask/DeleteTaskService.js";
 import { NextTaskService } from "../services/nextTask/NextTaskService.js";
 
+import { TaskListView } from "../views/TaskListView.js";
+import { NextTaskView } from "../views/NextTaskView.js";
+import { CreateTaskView } from "../views/CreateTaskView.js";
+import { CompleteTaskView } from "../views/CompleteTaskView.js";
+
 class TasksController {
   async createTask(args) {
     // const tasksRepository = new FakeTasksRepository();
     const fileTasks = new FileTasksRepository();
+    const createTaskView = new CreateTaskView();
     const createTaskService = new CreateTaskService(fileTasks);
     const arg_idx = args.findIndex((a) => a === "-p");
 
-    //TODO: move this rule to service
     const priority = arg_idx >= 1 ? args[arg_idx + 1] : undefined;
 
     const descriptionArray = arg_idx === -1 ? args : args.slice(0, arg_idx);
 
-    const task = await createTaskService.execute(
+    const { tasks, totalTasks, pendingTotal } = await createTaskService.execute(
       descriptionArray.join(" "),
       priority
     );
 
-    //TODO: format return to user: created task
-    console.log({ task });
+    createTaskView.render(tasks, totalTasks, pendingTotal);
   }
 
   async completeTask(args) {
     const fileTasks = new FileTasksRepository();
+    const completeTaskView = new CompleteTaskView();
     const completeTask = new CompleteTaskService(fileTasks);
 
-    const updatedTask = await completeTask.execute(args[0]);
+    const { tasks, totalTasks, pendingTotal } = await completeTask.execute(
+      args[0]
+    );
 
-    //TODO: format return to user: completed task
-    console.log({ updatedTask });
+    completeTaskView.render(tasks, totalTasks, pendingTotal);
   }
 
   async listTasks(args) {
     const fileTasks = new FileTasksRepository();
+    const taskListView = new TaskListView();
     const listTasks = new ListTasksService(fileTasks);
 
     const arg_idx = args.findIndex((a) => a === "-a");
     const listAll = arg_idx !== -1;
 
-    const tasks = await listTasks.execute(listAll);
+    const { tasks, totalTasks, pendingTotal } = await listTasks.execute(
+      listAll
+    );
 
-    //TODO: format return to user: list tasks
-    console.log({ tasks });
+    taskListView.render(tasks, listAll, totalTasks, pendingTotal);
   }
 
   async deleteTask(args) {
@@ -60,11 +68,13 @@ class TasksController {
 
   async nextTask(args) {
     const fileTasks = new FileTasksRepository();
+    const nextTaskView = new NextTaskView();
+
     const nextTask = new NextTaskService(fileTasks);
 
-    const response = await nextTask.execute();
+    const { tasks, totalTasks, pendingTotal } = await nextTask.execute();
 
-    console.log({ response });
+    nextTaskView.render(tasks, totalTasks, pendingTotal);
   }
 }
 

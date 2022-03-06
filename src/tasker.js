@@ -1,5 +1,6 @@
 import { CliError } from "./shared/erros/CliError.js";
 import { commands } from "./commands.js";
+import { printHelp } from "./shared/utils/printHelp.js";
 
 function parse_comands(command) {
   if (!command)
@@ -26,7 +27,9 @@ async function tasker() {
     const result = await command.action(args);
   } catch (error) {
     if (error instanceof CliError) {
-      console.log(error.error, error.description);
+      console.log("\x1b[31m%s\x1b[0m", error.error);
+      console.log("\x1b[33m%s\x1b[0m", error.description);
+      printHelp();
       return;
     }
     console.log(error);

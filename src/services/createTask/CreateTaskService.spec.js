@@ -15,18 +15,18 @@ describe("Create Task Service", () => {
     const description = "this is a test task";
     const priority = "normal";
 
-    const createdTask = await createTaskService.execute(description, priority);
+    const { tasks } = await createTaskService.execute(description, priority);
 
-    expect(createdTask).toHaveProperty("id");
+    expect(tasks[0]).toHaveProperty("id");
   });
 
   it("should always create new tasks with status pending", async () => {
     const description = "this is a test task";
     const priority = "normal";
 
-    const createdTask = await createTaskService.execute(description, priority);
+    const { tasks } = await createTaskService.execute(description, priority);
 
-    expect(createdTask.status).toBe("pending");
+    expect(tasks[0].status).toBe("pending");
   });
 
   it('"should not create new task if priority is not equal to high, normal or low"', async () => {

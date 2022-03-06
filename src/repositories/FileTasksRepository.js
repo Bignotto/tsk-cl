@@ -16,7 +16,7 @@ class FileTasksRepository {
         priority: 0,
       };
 
-      this.tasks.push(task0);
+      //this.tasks.push(task0);
       await fs.writeFileSync(".tasks", `${JSON.stringify(this.tasks)}\n`);
     }
 

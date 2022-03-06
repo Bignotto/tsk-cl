@@ -27,7 +27,13 @@ class CreateTaskService {
       priority,
     });
 
-    return newTask;
+    const tasks = await this.tasksRepository.list();
+
+    return {
+      tasks: [newTask],
+      totalTasks: tasks.length,
+      pendingTotal: tasks.filter((t) => t.status === "pending").length,
+    };
   }
 }
 
