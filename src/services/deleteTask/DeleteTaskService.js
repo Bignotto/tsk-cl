@@ -15,6 +15,13 @@ class DeleteTaskService {
     if (!task) throw new CliError("invalid parameter", "task not found");
 
     await this.tasksRepository.delete(Number(taskId));
+    const tasks = await this.tasksRepository.list();
+
+    return {
+      tasks: [task],
+      totalTasks: tasks.length,
+      pendingTotal: tasks.filter((t) => t.status === "pending").length,
+    };
   }
 }
 
