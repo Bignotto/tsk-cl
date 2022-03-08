@@ -1,3 +1,3 @@
-import { tasker } from "./tasker.js";
+import { tskr } from "./tskr.js";
 
-tasker();
+tskr();

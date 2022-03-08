@@ -14,7 +14,7 @@ function parse_comands(command) {
   return cmd;
 }
 
-async function tasker() {
+async function tskr() {
   try {
     //the "command" will always be the first word after the command itself
     //return a function related to the command
@@ -36,4 +36,4 @@ async function tasker() {
   }
 }
 
-export { tasker };
+export { tskr };
