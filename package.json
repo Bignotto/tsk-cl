@@ -1,11 +1,14 @@
 {
-  "name": "challenge-task-list",
-  "version": "0.0.0",
+  "name": "tsk",
+  "version": "1.0.0",
   "description": "comand line todo tool",
   "main": "src/index.js",
   "author": "Thiago Bignotto",
   "license": "MIT",
   "type": "module",
+  "bin": {
+    "tsk": "src/index.js"
+  },
   "scripts": {
     "test": "jest"
   },
