@@ -1,113 +1,103 @@
+# tsk-cl (tsk) 1.0.0
+
+tsk is a command line todo list utility written in javascript.
+
+This application was developed as a challenge for DevChallenge!
+
+[Challenge Task List](https://github.com/stevescruz/Challenge-Task-List)
+
+[DevChallenge](https://www.devchallenge.com.br/)
+
+#
+
+## Getting Started
+
+Install tsk globally:
+
 ```
-task <subcommand> # Accepts add, complete, delete, list and next as subcommands
+npm install tsk-cl -g
 
-task add <description> [-p <priority>] # Adds a pending task. Can set the task's priority to low, normal or high with the -p (or --priority) option
+or
 
-task complete <id> # Marks a task as done
-task delete <id> # Deletes a task
-task list [-a] # Shows pending tasks. The -a (or --all) option shows all tasks
-task next # Shows the next task of each priority
+yarn global tsk-cl
 ```
 
-https://stackoverflow.com/questions/9781218/how-to-change-node-jss-console-font-color
+Or you can add it to your projects dev dependencies:
 
----
+```
+npm install tsk-cl --save-
 
-### fev/23/2022
+or
 
-# Implemented Next Task Command
+yarn add tsk-cl -D
+```
 
-Implemented `next` command.
-This command list the first task added for each priority, ordered by priority.
+Then you can run it with:
 
-### Tests
+```
+npx tsk <command>
+```
 
-- should list next task correctly - all tasks
-- should list next task correctly - normal task complete
-- should list next task correctly - high task complete
-- should list next task correctly - more than one task on each priority
-- should list next task correctly - more than one task on each priority - complete high task
+## How to use it
 
----
+`tsk` will create a `.tasks` file on current folder. This is a simple JSON file stringfied.
 
-### fev/13/2022
+### Create a new task
 
-## Fix Create Task Priority Rule
+```
+tsk add <task description> [-p <priority>]
+```
 
-When user doesn't provide a priority, priority should be set to `normal`.
-This rule is now implemented in create task service.
+**Examples**
 
----
+```
+tsk add create task registrer screen -p low
 
-### fev/12/2022
+tsk add create a template to create new components -p high
+```
 
-## Task Complete command
+### Complete a task
 
-Implemented task complete command.
+```
+tsk complete <task id>
+```
 
-### Refactored both file and memory repositories
+**Examples**
 
-- implemented `findById` function in both repositories
-- implemented `update` function in both repositores
+```
+tsk complete 2
+```
 
-### Tests
+### Show next task
 
-Implemented tests:
+This command will show the oldest task for each priority.
 
-- should be able to complete a task
-- should not be able to complete a task with invalid id
-- should not be able to complete a task without id
+```
+tsk next
+```
 
-## List Tasks Command
+### List tasks
 
-Implemented list tasks command.
+List undone tasks:
 
-List all tasks pending on database file. If parameter -a is provided, all tasks are listed.
+```
+tsk list
+```
 
-### Refactored both file and memory repositories
+List all tasks:
 
-- implemented `list` function to return all tasks in tasks database.
+```
+tsk list -a
+```
 
-### Tests
+### Delete a task
 
-Implemented tests:
+```
+tsk delete <task id>
+```
 
-- should be able to list tasks correctly
-- should list done tasks when -a parameter is provided
-- should list only pending tasks
+**Examples**
 
-## Delete Task Command
-
-Implemented delete task command.
-
-### Refactored both file and memory repositories
-
-- implemented `delete` function to delete a task.
-
-### Tests
-
-Implemented tests:
-
-- should be able to delete a task
-- should not be able to delete task without id
-- should not be able to delete task with invalid id
-
-## Fix Create Task Priority
-
-Priority should be set as `high`, `normal` or `low`. `CreateTaskService` was saving priority as a number.
-
-Fixed `CreateTaskService` so priotiry is saved correctly.
-
-Fixed all tests to reflect these changes.
-
----
-
-### fev/07/2022
-
-Implemented tests for Create Task Service:
-
-- should be able to create new task
-- should always create new tasks with status pending
-- should not accept new tasks with negative priority
-- should not accept new tasks with priority higher than 10
-- should not accept new tasks with 0 priority
+```
+tsk delete 3
+```

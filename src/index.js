@@ -1,5 +1,3 @@
-#!/usr/bin/env node
+import { tskr } from "./tskr.js";
 
-import { tasker } from "./tasker.js";
-
-tasker();
+tskr();
