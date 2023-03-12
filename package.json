@@ -1,6 +1,6 @@
 {
   "name": "tsk-cl",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "comand line todo tool",
   "main": "src/index.js",
   "author": "Thiago Bignotto",
