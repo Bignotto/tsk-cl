@@ -9,6 +9,7 @@ import { TaskListView } from "../views/TaskListView.js";
 import { NextTaskView } from "../views/NextTaskView.js";
 import { CreateTaskView } from "../views/CreateTaskView.js";
 import { CompleteTaskView } from "../views/CompleteTaskView.js";
+import { DeleteTaskView } from "../views/DeleteTaskView.js";
 
 class TasksController {
   async createTask(args) {
@@ -59,11 +60,14 @@ class TasksController {
 
   async deleteTask(args) {
     const fileTasks = new FileTasksRepository();
+    const deleteTaskView = new DeleteTaskView();
     const deleteTask = new DeleteTaskService(fileTasks);
 
-    const tasks = await deleteTask.execute(args[0]);
+    const { tasks, totalTasks, pendingTotal } = await deleteTask.execute(
+      args[0]
+    );
 
-    console.log({ tasks });
+    deleteTaskView.render(tasks, totalTasks, pendingTotal);
   }
 
   async nextTask(args) {
