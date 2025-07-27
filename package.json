@@ -13,12 +13,12 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.0",
-    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/core": "^7.28.0",
+    "@babel/plugin-transform-runtime": "^7.28.0",
     "@babel/polyfill": "^7.12.1",
-    "@babel/preset-env": "^7.16.11",
-    "@types/jest": "^27.4.0",
-    "babel-jest": "^27.5.0",
-    "jest": "^27.5.0"
+    "@babel/preset-env": "^7.28.0",
+    "@types/jest": "^30.0.0",
+    "babel-jest": "^30.0.5",
+    "jest": "^30.0.5"
   }
 }
